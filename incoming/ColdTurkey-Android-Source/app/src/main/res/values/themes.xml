@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ColdTurkey" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#0C0A09</item>
+        <item name="android:navigationBarColor">#0C0A09</item>
+    </style>
+    <style name="Theme.ColdTurkey.Overlay" parent="android:Theme.Material.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">#0C0A09</item>
+        <item name="android:windowShowWallpaper">false</item>
+    </style>
+</resources>

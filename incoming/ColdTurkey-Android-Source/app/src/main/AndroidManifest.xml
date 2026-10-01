@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.coldturkey.focus">
+
+    <!-- مجوز مشاهده تمام برنامه‌های نصب‌شده کاربر جهت انتخاب در لیست با آیکون -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
+    <!-- مجوز راه‌اندازی و بازیابی قفل پس از ری‌استارت گوشی -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- مجوز نمایش صفحه مسدودی روی سایر برنامه‌ها -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- مجوز مستثنی‌سازی از بهینه‌سازی باتری برای جلوگیری از کشته شدن سرویس توسط شیائومی و سامسونگ -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <application
+        android:allowBackup="false"
+        android:label="Cold Turkey"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ColdTurkey">
+
+        <!-- صفحه اصلی اپلیکیشن -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- صفحه اوورلی قفل تمام صفحه -->
+        <activity
+            android:name=".ui.BlockOverlayActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ColdTurkey.Overlay"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true" />
+
+        <!-- سرویس دسترسی‌پذیری جهت بلاک آنی و بی‌درنگ برنامه‌ها -->
+        <service
+            android:name=".service.AppBlockerAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <!-- دریافت‌کننده ری‌استارت گوشی جهت ادامه شمارش قفل -->
+        <receiver
+            android:name=".receiver.BootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
