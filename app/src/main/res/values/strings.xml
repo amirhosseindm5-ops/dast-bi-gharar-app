@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">دست بی‌قرار</string>
+    <string name="accessibility_desc">برای تشخیص باز شدن برنامه‌های انتخاب‌شده و بستن آن‌ها در زمان تمرکز استفاده می‌شود.</string>
+</resources>
